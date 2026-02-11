@@ -2,6 +2,8 @@
 
 A fake terminal where kids can type anything and get fun, safe responses. Single HTML file, no dependencies, runs offline.
 
+<img width="946" height="519" alt="image" src="https://github.com/user-attachments/assets/a957eac1-a42c-44b5-96a0-21b5253b4b34" />
+
 ## Problem
 
 Most "learn to type" apps are boring drills or require accounts and installations. Toddlers and pre-readers need something that rewards every keypress — real words AND keyboard smashing — without frustration or failure states.
