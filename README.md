@@ -56,7 +56,7 @@ Works on desktop and mobile. Supports light and dark mode (follows system prefer
 
 ## More like this
 
-I built tiny-terminal as part of teaching my 3-year-old computational thinking through play. I wrote a whole curriculum around it — [12 Weeks of Tech Projects to Build With Your Kid](https://shop.raisingpixels.dev/l/12-weeks-tech-projects). 60 activities, mostly unplugged, for ages 2-6.
+I built tiny-terminal as part of teaching my 3-year-old computational thinking through play. I wrote a whole curriculum around it — [12 Weeks of Tech Projects to Build With Your Kid](https://buildwithyourkid.com/12-weeks/). 60 activities, mostly unplugged, for ages 2-6.
 
 ## License
 
