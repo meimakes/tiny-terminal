@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tiny Terminal 🖥️ — A keyboard playground for kids</title>
-<meta name="description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no tracking, no account required. Built by Diana.">
+<meta name="description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no account required. What kids type stays in their browser. Built by Diana.">
 <meta name="author" content="Diana">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Tiny Terminal — A keyboard playground for kids">
-<meta property="og:description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no tracking, no account required.">
+<meta property="og:description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no account required. What kids type stays in their browser.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tiny-terminal.com">
 <meta property="og:image" content="https://tiny-terminal.com/og.png">
@@ -19,16 +19,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@madebydia">
 <meta name="twitter:title" content="Tiny Terminal — A keyboard playground for kids">
-<meta name="twitter:description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no tracking, no account required.">
+<meta name="twitter:description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no account required. What kids type stays in their browser.">
 <meta name="twitter:image" content="https://tiny-terminal.com/og.png">
 
 <link rel="canonical" href="https://tiny-terminal.com">
 
 <!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-DhMEzmtaH0fhY3PWgKjXO.js"></script>
 <script>
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
+  // Local previews and downloaded copies never send analytics.
+  if (location.hostname === 'tiny-terminal.com') {
+    plausible.init();
+    const analytics = document.createElement('script');
+    analytics.async = true;
+    analytics.src = 'https://plausible.io/js/pa-DhMEzmtaH0fhY3PWgKjXO.js';
+    document.head.appendChild(analytics);
+  }
 </script>
 
 <style>
@@ -97,6 +103,55 @@
   .dot.yellow { background: var(--yellow); }
   .dot.green { background: var(--green); }
   .titlebar .title { flex: 1; text-align: center; font-size: 13px; color: var(--overlay); }
+
+  .parents { font-size: 14px; }
+  .parents summary { cursor: pointer; list-style: none; padding: 6px 0 6px 8px; }
+  .parents summary::-webkit-details-marker { display: none; }
+  .parents summary:hover { text-decoration: underline; }
+  .parent-panel {
+    position: absolute;
+    z-index: 2;
+    top: 56px;
+    right: 12px;
+    width: min(440px, calc(100% - 24px));
+    max-height: calc(100dvh - 72px);
+    overflow-y: auto;
+    padding: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 40px #0003;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .parent-panel h2 { font-size: 22px; line-height: 1.25; margin-bottom: 12px; }
+  .parent-panel p { margin-bottom: 16px; }
+  .parent-panel ul { padding-left: 20px; margin-bottom: 20px; }
+  .parent-panel li + li { margin-top: 6px; }
+  .parent-panel code { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+  .parent-panel a { color: inherit; text-underline-offset: 3px; }
+  .parent-panel a:hover { text-decoration-thickness: 2px; }
+  .parent-next { border-top: 1px solid var(--border); padding-top: 20px; }
+  .parent-next > a { display: inline-block; font-weight: 700; margin-bottom: 6px; }
+  .parent-panel .parent-note { font-size: 14px; }
+  .parent-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .parent-panel button {
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 12px;
+    background: var(--surface);
+    color: var(--text);
+  }
+  .parent-panel button:hover { border-color: var(--text); }
+  .parents :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+  .parent-panel .copy-status { font-size: 14px; margin: 8px 0 0; }
+  #share-fallback { margin-top: 12px; }
+  #share-fallback input { width: 100%; font: inherit; padding: 8px; margin-top: 4px; }
+  .parent-panel .privacy-note { font-size: 13px; margin: 20px 0 0; }
 
   .terminal {
     flex: 1;
@@ -173,6 +228,33 @@
     <div class="dot green"></div>
   </div>
   <div class="title">tiny terminal</div>
+  <details class="parents" id="parents">
+    <summary>For parents</summary>
+    <section class="parent-panel" aria-labelledby="parent-heading">
+      <h2 id="parent-heading">A little room to explore.</h2>
+      <p>A free pretend terminal for kids who want to use your keyboard. Even nonsense gets a response.</p>
+      <ul>
+        <li>Type anything, then press <strong>Enter</strong>.</li>
+        <li>Try <code>cat</code>, <code>airplane</code>, a color, or a number.</li>
+        <li>Let them mash the keys. There are no wrong answers.</li>
+      </ul>
+      <div class="parent-next">
+        <a href="https://buildwithyourkid.com/?utm_source=tiny-terminal&amp;utm_medium=referral&amp;utm_campaign=parents" target="_blank" rel="noopener" data-related-work>More projects to try with your kid &rarr;</a>
+        <p class="parent-note">Build With Your Kid: 60+ STEM activities for ages 2–6, with plenty to do away from a screen. No reading required.</p>
+      </div>
+      <p class="parent-note">Made by <a href="https://madebydia.com/?utm_source=tiny-terminal&amp;utm_medium=referral" target="_blank" rel="noopener" data-related-work>Diana</a>, for curious kids and their grown-ups.</p>
+      <div class="parent-actions">
+        <button type="button" id="copy-link">Copy site link</button>
+        <button type="button" id="back-to-play">Back to play</button>
+      </div>
+      <p class="copy-status" id="copy-status" role="status"></p>
+      <div id="share-fallback" hidden>
+        <label for="share-url">Copy this link:</label>
+        <input id="share-url" readonly value="https://tiny-terminal.com/">
+      </div>
+      <p class="privacy-note">No ads or accounts. Anonymous usage counts help improve the site; what your child types stays in this browser.</p>
+    </section>
+  </details>
 </div>
 
 <div class="terminal" id="terminal">
@@ -578,6 +660,7 @@ inputEl.autocomplete = 'off';
 inputEl.autocapitalize = 'off';
 inputEl.spellcheck = false;
 inputEl.rows = 1;
+inputEl.setAttribute('aria-label', 'Type here');
 inputEl.style.cssText = 'background:none;border:none;color:var(--text);font-family:"JetBrains Mono",monospace;font-size:16px;outline:none;flex:1;caret-color:var(--prompt);resize:none;overflow:hidden;line-height:1.6;padding:0;margin:0;';
 inputLine.appendChild(inputEl);
 terminal.appendChild(inputLine);
@@ -588,11 +671,61 @@ function autoGrow() {
 }
 inputEl.addEventListener('input', autoGrow);
 
+const recordedEvents = new Set();
+function recordUsage(name, once = false) {
+  if (location.hostname !== 'tiny-terminal.com') return;
+  if (once && recordedEvents.has(name)) return;
+  recordedEvents.add(name);
+  // Only fixed event names are sent, never the child's input.
+  try { window.plausible(name); } catch (_) { /* Play works without analytics. */ }
+}
+
 inputEl.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleCommand(inputEl.value); inputEl.value = ''; autoGrow(); }
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (inputEl.value.trim()) recordUsage('First Input', true);
+    handleCommand(inputEl.value);
+    inputEl.value = '';
+    autoGrow();
+  }
 });
-document.addEventListener('click', () => inputEl.focus());
+terminal.addEventListener('click', () => inputEl.focus());
 inputEl.focus();
+
+const parents = document.getElementById('parents');
+parents.addEventListener('toggle', () => {
+  if (parents.open) recordUsage('Parent Panel Opened', true);
+});
+document.addEventListener('click', (e) => {
+  if (parents.open && !parents.contains(e.target)) backToPlay();
+});
+function backToPlay() {
+  parents.open = false;
+  inputEl.focus();
+}
+document.getElementById('back-to-play').addEventListener('click', backToPlay);
+parents.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && parents.open) {
+    e.preventDefault();
+    backToPlay();
+  }
+});
+document.querySelectorAll('[data-related-work]').forEach(link => {
+  link.addEventListener('click', () => recordUsage('Related Work Click'));
+});
+document.getElementById('copy-link').addEventListener('click', async () => {
+  const feedback = document.getElementById('copy-status');
+  const fallback = document.getElementById('share-fallback');
+  try {
+    await navigator.clipboard.writeText('https://tiny-terminal.com/');
+    fallback.hidden = true;
+    feedback.textContent = 'Link copied. Ready to share.';
+  } catch (_) {
+    feedback.textContent = 'Select and copy the link below.';
+    fallback.hidden = false;
+    document.getElementById('share-url').select();
+  }
+});
 
 // Override scrollToBottom to keep input line at the end of content
 scrollToBottom = function() {

@@ -54,7 +54,8 @@ Works on desktop and mobile. Supports light and dark mode (follows system prefer
 - Visual over textual (emoji, ASCII art, big letters)
 - Gibberish is celebrated, real words are rewarded more
 - Gentle nudges toward typing real words via picture challenges
-- No scores, no failures, no ads, no tracking
+- No scores, no failures, no ads, no accounts
+- Anonymous usage events; typed input is never sent to analytics
 
 ## More like this
 
@@ -63,3 +64,15 @@ I built tiny-terminal as part of teaching my 3-year-old computational thinking t
 ## License
 
 MIT
+
+## Usage measurement
+
+The main page sends three fixed Plausible event names on tiny-terminal.com only:
+
+- `First Input`: first non-empty submission per page load.
+- `Parent Panel Opened`: first parent-panel opening per page load.
+- `Related Work Click`: each click on the book or Diana link.
+
+No typed text is attached to events. Local previews and downloaded copies do not load analytics. Before publishing, add these exact names as custom event goals in the site's Plausible settings to see their conversion counts. Local changes alone do not configure those goals.
+
+To preview locally, run `python3 -m http.server 8873 --bind 127.0.0.1` and open http://127.0.0.1:8873/.
